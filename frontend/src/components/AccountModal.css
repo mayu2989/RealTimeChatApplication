@@ -1,0 +1,134 @@
+.account-modal {
+  max-width: 480px;
+}
+
+.account-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  background: #2c2d30;
+  border-radius: 8px;
+}
+
+.account-tabs button {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #ababad;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.account-tabs button.active {
+  background: #1164a3;
+  color: #fff;
+}
+
+.account-tabs button.danger-tab.active {
+  background: #e01e5a;
+}
+
+.account-tabs button:hover:not(.active) {
+  color: #fff;
+}
+
+.profile-details {
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.profile-details div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.profile-details dt {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ababad;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.profile-details dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #fff;
+  word-break: break-word;
+}
+
+.account-loading {
+  color: #ababad;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.delete-account-form .delete-warning {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #ff6b9d;
+  background: rgba(224, 30, 90, 0.12);
+  border: 1px solid rgba(224, 30, 90, 0.35);
+  border-radius: 6px;
+}
+
+.account-modal form input[type='email'],
+.account-modal form input[type='password'],
+.account-modal form input[type='text'] {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #565856;
+  border-radius: 6px;
+  background: #2c2d30;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.account-modal form input:focus {
+  border-color: #1164a3;
+}
+
+.btn-danger {
+  background: #e01e5a !important;
+  color: #fff !important;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c4184d !important;
+}
+
+.sidebar-user-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
+}
+
+.sidebar-user-btn:hover .user-name {
+  color: #fff;
+}
+
+.sidebar-user-btn .user-name {
+  transition: color 0.15s;
+}
+
+.remove-friend-btn-visible {
+  opacity: 1;
+}

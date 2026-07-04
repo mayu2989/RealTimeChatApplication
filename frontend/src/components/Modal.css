@@ -1,0 +1,281 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  background: #1a1d21;
+  border: 1px solid #3f4147;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal h3 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.modal-subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: #ababad;
+}
+
+.modal-search-btn {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: #1164a3;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.user-search-results {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid #3f4147;
+  border-radius: 8px;
+}
+
+.user-search-results li {
+  border-bottom: 1px solid #3f4147;
+}
+
+.user-search-results li:last-child {
+  border-bottom: none;
+}
+
+.search-result-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #1164a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  grid-column: 1;
+}
+
+.search-result-info {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  line-height: 1.25;
+}
+
+.search-result-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-result-username {
+  display: block;
+  font-size: 0.75rem;
+  color: #ababad;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action-btn {
+  grid-column: 3;
+  justify-self: end;
+  padding: 0.4rem 0.85rem;
+  border: none;
+  border-radius: 6px;
+  background: #1164a3;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-empty-note {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: #ababad;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.modal-error {
+  background: rgba(224, 30, 90, 0.15);
+  border: 1px solid #e01e5a;
+  color: #ff6b9d;
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.modal form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ababad;
+}
+
+.modal form input[type='text'] {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #565856;
+  border-radius: 6px;
+  background: #2c2d30;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.modal form input[type='text']:focus {
+  border-color: #1164a3;
+}
+
+.checkbox-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.5rem !important;
+  color: #d1d2d3 !important;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1164a3;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.modal-actions button {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.modal-actions button[type='submit'],
+.modal-actions button:not(.btn-secondary) {
+  background: #1164a3;
+  color: #fff;
+}
+
+.modal-actions button[type='submit']:hover:not(:disabled),
+.modal-actions button:not(.btn-secondary):hover:not(:disabled) {
+  background: #0b4c8c;
+}
+
+.modal-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  border: 1px solid #565856 !important;
+  color: #ababad !important;
+}
+
+.btn-secondary:hover {
+  border-color: #ababad !important;
+  color: #fff !important;
+}
+
+/* Legacy user-search button layout (UserSearchModal) */
+.user-search-results li button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.user-search-results li button:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.user-search-results li button span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.user-search-results li button strong {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-search-results li button small {
+  font-size: 0.75rem;
+  color: #ababad;
+}
