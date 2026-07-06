@@ -1,5 +1,4 @@
 import { Client, type IMessage, type StompSubscription } from '@stomp/stompjs'
-import SockJS from 'sockjs-client'
 import type {
   ChannelMessageResponse,
   DirectMessageResponse,
@@ -45,8 +44,13 @@ class WebSocketService {
 
       const timeout = setTimeout(finish, 8000)
 
+      // Convert http/https to ws/wss for native WebSocket
+      const wsUrl = (import.meta.env.VITE_WS_URL ?? 'ws://localhost:8080/ws')
+        .replace('https://', 'wss://')
+        .replace('http://', 'ws://')
+
       this.client = new Client({
-        webSocketFactory: () => new SockJS('/ws'),
+        brokerURL: wsUrl,
         connectHeaders: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +67,7 @@ class WebSocketService {
           console.error('STOMP error:', frame.headers['message'])
         },
         onWebSocketError: () => {
-          // Transient errors during reconnect/refresh are expected in dev
+          // Transient errors during reconnect/refresh are expected
         },
         onDisconnect: () => {
           this.dmSubscription = null
@@ -106,23 +110,32 @@ class WebSocketService {
 
     if (this.dmHandler) {
       this.dmSubscription?.unsubscribe()
-      this.dmSubscription = this.client.subscribe('/user/queue/messages', (message: IMessage) => {
-        this.dmHandler?.(JSON.parse(message.body) as DirectMessageResponse)
-      })
+      this.dmSubscription = this.client.subscribe(
+        '/user/queue/messages',
+        (message: IMessage) => {
+          this.dmHandler?.(JSON.parse(message.body) as DirectMessageResponse)
+        },
+      )
     }
 
     if (this.onlineHandler) {
       this.onlineSubscription?.unsubscribe()
-      this.onlineSubscription = this.client.subscribe('/topic/online-status', (message: IMessage) => {
-        this.onlineHandler?.(JSON.parse(message.body) as OnlineStatusEvent)
-      })
+      this.onlineSubscription = this.client.subscribe(
+        '/topic/online-status',
+        (message: IMessage) => {
+          this.onlineHandler?.(JSON.parse(message.body) as OnlineStatusEvent)
+        },
+      )
     }
 
     if (this.friendHandler) {
       this.friendSubscription?.unsubscribe()
-      this.friendSubscription = this.client.subscribe('/user/queue/friends', (message: IMessage) => {
-        this.friendHandler?.(JSON.parse(message.body) as FriendUpdateEvent)
-      })
+      this.friendSubscription = this.client.subscribe(
+        '/user/queue/friends',
+        (message: IMessage) => {
+          this.friendHandler?.(JSON.parse(message.body) as FriendUpdateEvent)
+        },
+      )
     }
   }
 
@@ -152,9 +165,12 @@ class WebSocketService {
     this.dmHandler = handler
     if (this.client?.connected) {
       this.dmSubscription?.unsubscribe()
-      this.dmSubscription = this.client.subscribe('/user/queue/messages', (message: IMessage) => {
-        handler(JSON.parse(message.body) as DirectMessageResponse)
-      })
+      this.dmSubscription = this.client.subscribe(
+        '/user/queue/messages',
+        (message: IMessage) => {
+          handler(JSON.parse(message.body) as DirectMessageResponse)
+        },
+      )
     }
   }
 
@@ -162,9 +178,12 @@ class WebSocketService {
     this.onlineHandler = handler
     if (this.client?.connected) {
       this.onlineSubscription?.unsubscribe()
-      this.onlineSubscription = this.client.subscribe('/topic/online-status', (message: IMessage) => {
-        handler(JSON.parse(message.body) as OnlineStatusEvent)
-      })
+      this.onlineSubscription = this.client.subscribe(
+        '/topic/online-status',
+        (message: IMessage) => {
+          handler(JSON.parse(message.body) as OnlineStatusEvent)
+        },
+      )
     }
   }
 
@@ -172,9 +191,12 @@ class WebSocketService {
     this.friendHandler = handler
     if (this.client?.connected) {
       this.friendSubscription?.unsubscribe()
-      this.friendSubscription = this.client.subscribe('/user/queue/friends', (message: IMessage) => {
-        handler(JSON.parse(message.body) as FriendUpdateEvent)
-      })
+      this.friendSubscription = this.client.subscribe(
+        '/user/queue/friends',
+        (message: IMessage) => {
+          handler(JSON.parse(message.body) as FriendUpdateEvent)
+        },
+      )
     }
   }
 
